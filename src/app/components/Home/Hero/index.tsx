@@ -17,18 +17,17 @@ const   Hero = () => {
               </p>
             </div>
             <h1 className='text-midnight_text lg:text-start text-center font-semibold leading-tight capitalize'>
-              Learn Engineering from Top Experts
+              Struggling? Upskill with Our Expert-Led Courses and Mentorship
             </h1>
             <p className='text-black/70 text-lg lg:text-start text-center max-w-xl capitalize'>
-              Build skills with our courses and mentor from world-class
-              companies.
+              Unlock your potential with our expert-led courses and mentorship.
             </p>
             <div className='relative rounded-full'>
               <input
                 type='text'
                 name='course'
                 className='py-4 pl-8 pr-20 text-lg w-full text-black rounded-full border border-black/10 focus:outline-hidden focus:border-primary duration-300 shadow-input-shadow'
-                placeholder='Search engineering courses...'
+                placeholder='Search expert-led courses...'
                 autoComplete='off'
               />
               <button className='group border border-secondary bg-secondary hover:bg-transparent p-3 rounded-full absolute right-2 top-1.5 duration-300 hover:cursor-pointer'>
@@ -79,8 +78,8 @@ const   Hero = () => {
           </div>
           <div className='col-span-6 flex justify-center'>
             <Image
-              src='/images/banner/mahila.webp'
-              alt='nothing'
+              src='/images/banner/banner.webp'
+              alt='expert-led courses and mentorship'
               width={1000}
               height={805}
             />

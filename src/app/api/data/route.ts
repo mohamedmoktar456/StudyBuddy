@@ -6,10 +6,10 @@ import { TestimonialType } from '@/app/types/testimonial'
 import { NextResponse } from 'next/server'
 
 const HeaderData: HeaderType[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Courses', href: '/#courses  ' },
-  { label: 'Mentor', href: '/#mentor' },
-  { label: 'Contact Us', href: '/#contact' },
+  { label: 'Find Expert', href: '/' },
+  { label: 'Add Material', href: '/#courses  ' },
+  { label: 'Bootcamp', href: '/#mentor' },
+  { label: 'Support', href: '/#contact' },
   { label: 'Docs', href: '/documentation' },
 ]
 
