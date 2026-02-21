@@ -1,0 +1,284 @@
+Computer Graphics
+Lecture 06
+Viewing and clipping
+Outlines 
+2. Clipping 
+• It is removing lines or portions of lines outside 
+an area  
+– Line
+• Cohen– Algorithm 
+– Polygon 
+• Sutherland Hodgman - Algorithm
+1. Viewing
+– Camera
+• Light                           Camera               
+Object
+Remember The Big Idea
+• Camera 
+– Viewing - Clipping – Focus - Zoom
+1- Camera model
+• Camera   defn
+• Synthetic Camera   = Virtual camera defn
+• Difference
+There are two broad classes of projection  Parallel : Typically used for architectural and engineering drawings Perspective  Realistic looking and used in computer graphics Projectors Projeciors PIUjECLUI Prujection ٥١٩٨٥ Center ٥f ٥١٥٨٤ Center 0f UIUJECIIUI DIUjELIIUI at infinity ذ٥ ( Parallel Projection Perspective Projection
+View  volume
+view frustum
+• It is the region of space in the modeled world
+that may appear on the screen; it is the field of
+view of a perspective virtual camera system.
+• Front and back clipping planes: limit extent of camera’s
+view by rendering (parts of) objects lying between them
+and throwing away everything outside of them
+1- Length →front and back 
+clipping planes
+• Volume of space 
+between Front and 
+Back clipping planes 
+defines what camera 
+can see
+– Position of planes 
+defined by distance 
+along Look vector
+– Objects appearing 
+outside of view volume 
+don’t get drawn
+– Objects intersecting view 
+volume get clipped
+3- Angle view 
+•
+Height angle: 
+determines how 
+much of the scene we 
+will fit into our view 
+volume; larger height 
+angles fit more of the 
+scene into the view 
+volume
+– the greater the angle, 
+the greater the amount 
+of perspective distortion
+Focal Length Angle Of View Differenses 2.81 ش 6nش 8nش 108` 86.4` 52' 4٥٢
+Aperture
+Viewing and clipping
+• Example
+Viewing and Clipping
+• The viewing is the position of points
+relative to the viewing
+• The Clipping is removing points behind
+the viewer −before generating the view.
+(removing segments that are outside the
+viewing pane.)
+1- Point Clipping
+• Clipping a point from a given window is very
+easy.
+• Point clipping tells us whether the given point X,
+Y is within the given window or not;
+• and decides whether we will use the minimum
+and maximum coordinates of the window.
+• The point is inside the window,
+– if X lies in between Wx1 ≤X ≤Wx2.
+• And,
+– if Y lies in between Wy1 ≤Y ≤Wy2.
+2- Line Clipping
+• The concept of line clipping is same as point
+clipping.
+• In line clipping, we will cut the portion of line
+which is outside of window and keep only the
+portion that is inside the window.
+Method 1- Cohen- Line Clippings
+Line clipping:
+Cohen- Line Clippings
+• This algorithm uses the clipping window
+as:
+• for the clipping region (window) is
+– (XWmin , YWmin)
+– (XWmax, YWmax).
+Clipping winde (XWmin VWmax ) (XWmax , JWmax ) (XWmin JWmin (،XW 1113}` Umin
+• We will use 4-bits to divide the entire
+region. These 4 bits represent the
+• Top,
+• Bottom,
+• Right, and
+• Left of the region.
+RIGHT BUTTOM LEFT TOP 1001 1000 1010 0001 0000 0010 0101 0100 0110
+There are 3 possibilities for the line 
+• Line can be completely inside the window
+This line will be completely inside the region.
+• Line can be completely outside of the 
+window 
+This line will be completely removed from the  
+region.
+• Line can be partially inside the window
+We will find intersection points and draw only that 
+portion of line that is inside region.
+Clipping winde (XWmin VWmax ) (XWmax , JWmax ) (XWmin JWmin (،XW 1113}` Umin
+Algorithm
+• Step 1 −Assign a region code for each endpoints.
+• Step 2 −If both endpoints have a region code 0000
+then accept this line.
+• Step 3 −Else, perform the logical AND operation for
+both region codes.
+– Step 3.1 −If the result is not 0000, then reject the line.
+– Step 3.2 −Else you need clipping.
+• Step 3.2.1 −Choose an endpoint of the line that is outside the window.
+• Step 3.2.2 −Find the intersection point at the window boundary base on regioncode.
+• Step 3.2.3 −Replace endpoint with the intersection point and update the region
+code.
+• Step 3.2.4 −Repeat step 2 until we find a clipped line either trivially accepted or
+trivially rejected.
+• Step 4 −Repeat step 1 for other lines.
+Case 1
+• P1→0000     zero
+• P2→0000     zero
+-------------------
+And 0000        zero
+Visible line
+Accept line 
+No clipping
+Case 2
+• P3→1000    non zero
+• P4→1000    non zero
+-------------------
+And 1000       non zero
+Not Visible line
+reject line 
+No clipping
+Case 3
+• P5→1000    non zero
+• P6→0000    zero
+-------------------
+And  0000       zero
+Means that some part of line inside and 
+some part outside
+Clipping required
+Case 3
+• P5’→0000    zero
+• P6→0000    zero
+-------------------
+And  0000       zero
+accept
+Case 4
+• P7→1000    nonzero
+• P8→0100    nonzero
+-------------------
+And  0000       zero
+Need clipping
+Case 4
+• P7’→0000    zero
+• P8→0100    nonzero
+-------------------
+And  0000       zero
+Need clipping
+Case 4
+• P7’→0000    zero
+• P8’→0000    zero
+-------------------
+And  0000       zero
+accept
+Intersection point
+• Calculate intersection point
+• Line end points (x1,y1) and (x2,y2)
+• Y’ of intersection
+– Y’=y1+m(xboundary – x1)
+– Xboundary is x window max or min
+• x’ of intersection
+– x’=x1+1/m(yboundary – y1)
+– yboundary is y window max or min
+Example
+• using Cohen line clipping algorithm to find 
+intersection points with the window where 
+the Window’s coordinates are: (2,3) , 
+(12,3) , (2,6) and (12,6). The Line 
+endpoints (1,8) and (7,1)
+the Window’s coordinates are: (2,3) , (12,3) , (2,6) and (12,6). 
+The Line endpoints (1,8) and (7,1)
+2,3
+12,3
+12,6
+2,6
+1,8
+7,1
+1000
+0000
+0100
+1001
+P1→1001
+P2→ 0100
+----------------------
+And 0000     clipping required
+P1’→ 0000
+P2→ 0100
+------------
+And 0000 clipping required
+P1’→ 0000
+P2’→ 0000
+------------
+And 0000 accept
+Intersection points
+• y’ of intersection is     y’=y1+m(xboundary – x1)
+• x’ of intersection is     x’=x1+1/m(yboundary – y1)
+where   Xboundary is xwmax or xwmin 
+and 
+•             yboundary is ywmax orywmin
+• if intersection in the top then y’= ywmax
+• if intersection in the bottom then y’= ywmin
+• if intersection in the left then x’= xwmin
+• if intersection in the right then x’= xwmax
+• First intersection  (x’,y’)
+• Y’=ywmax                  X’=x1+m(ywmax – y1)
+• second intersection  (x’’,y’’)
+• Y’’=ywmin                 X’=x2+m(ywmin – y2)
+Clipping 
+• It is removing lines or portions of lines 
+outside an area  
+– Point
+– Line
+• Cohen– Algorithm 
+– Polygon 
+• Sutherland Hodgman Algorithm
+What is Polygon?
+• Ordered set of vertices (points)
+–  Usually counter-clockwise عكس
+•  Two consecutive vertices define an edge
+•  Last vertex implicitly connected to first
+What is polygon clipping?
+To clip 8 polygon, we cannot directly apply line clipping method {0 the individual olygon edges because this approach would  roduce 8 series 0f unconnected line egments as shown in figure
+Polygon Clipping Sutherland Hodgman 
+Algorithm
+• In this algorithm, all the vertices of the polygon 
+are clipped against each edge of the clipping 
+window.
+steps
+e
+If   the first vertex is outside the window boundary and the second vertex is inside Then both the intersection   point 0f the polygon edge with the window boundary an٥ the second vertex 8r٥ added to the output vertex list
+2. |f both input vertices are inside the window boundary Then, only the second vertex is added to the output vertex list
+3. If   the first vertex i5 inside the window boundary and the second vertex is outside. Then, only the edge intersection with the window  boundary is added {0 the output vertex list
+|f both input vertices are outside the window boundary Then, nothing is added to the output vertex |ist.
+idea
+• Move around polygon from v1 to vn and back to v1
+• Input:
+• v1, v2, … vn the vertices defining the polygon
+• Single infinite clip edge w/ inside/outside info
+• Output:
+• v’1, v’2, … v’m, vertices of the clipped polygon
+• Do this 4 times
+• Traverse vertices (edges)
+• Add vertices one-at-a-time to output polygon
+• Use inside/outside info
+• Edge intersections
+{A,B,C,D, ٤,F,G, H,A}
+Final Result ٥»٦٨,X,٤ ,٧,Z,W,A}
+Edgewise clipping In order to clip polygon edges against a window edge we move from vertex Vi to the next vertex Vi+a and decide the output vertex according to following four simple cases 
+inside-inside ٧2 ٥٨١y ٥٧٤؟ outside outslde ٥٧٤؟ nothing ١٥٤؟٥٧٧-١٨5١٥٤ ٧١ »٥٨١١ ٥٧٤؛ outside-inside ٩٧٤؛ {٧1', ٧2}
+Example 1
+
+For Left ٤d9٠ Action OutpUt 0U٠آ|N ٥4 ٨٧ ١٧ |0UI
+For Right ٤dg٠ 4t79r OUtpUt ٨٧ ١٧ ||0U7 |0٧1-||/ ٥ ٥ L'3 |١٧
+For Bottom Action OUIPUt 8'/ ١٨ ١٧ رز١ ١٢4 4٥' لزا !را CG !زا!لا 68 ١١ ١٢ ٤d٩٠
+For Top Bdg٠ 4ct70n1 0uput ٥A آ00[| ٥٧T IN 4٥' ١٢ ١٧ ٥٥ |١٢+٢/ 68 ١١١١
+
+Example 2
+chp] *٩٣ ١o٧ O9م ٧R٧٧٠ ل oulpul ^ 8 ٦n١n ع 8 ١nد n ٥  ١٨ ٤ ٥ 1n ~&ل ٤٨ ٥٧7 »١٨
+9= & لددهاما ا9ما wqy ربف 0[ P 3 ١n J6ur ٥ ٣ 1hد لل0 ع 3 ١ ٠٠ ١٨  ٥ ٥ ١١٨  ١٨ ٤ ٥ ٦n -»١^ [ ٢ا~ |ل ٤ A ٦١ ١n ع
+fivj راب   Botwي v٧٨x عم ٢|٥ ^ ٨ ١٨٦١n ^'8' ١١٨ ١٦ ع '8 ٠٦ ١٦n 104R Rou chp 1w ~٧م ^ردل ١» ١٨^ ٨؟3!11=57د1٨
+9م0'_0 0٥ ٥ BBot   لد ابig 1P1ا 70 0| +ا٧ 0? 90 ٨٥ ٣زد آ٥٧ سا٧٧ للد ٨'8' ٦١٨ ١٠  ا8 C C C ٤ ٥ بعلد دله bمthw هذد ٨ ٥٧+ ٦٨ [ [' دا 
